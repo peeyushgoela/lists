@@ -5,7 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^todo_lists/', include('todo_lists.urls')),
+                       url(r'^$', 'todo_lists.views.index'),
     # Examples:
     # url(r'^$', 'lists.views.home', name='home'),
     # url(r'^lists/', include('lists.foo.urls')),
