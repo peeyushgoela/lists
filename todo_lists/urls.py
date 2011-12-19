@@ -6,6 +6,11 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
                        url(r'^$', 'todo_lists.views.index'),
+                       url(r'^login', 'todo_lists.views.login'),
+                       url(r'^signup', 'todo_lists.views.signup'),
+                       url(r'^home', 'todo_lists.views.home'),
+                       url(r'^logout', 'todo_lists.views.logout'),
+                       
     # Examples:
     # url(r'^$', 'lists.views.home', name='home'),
     # url(r'^lists/', include('lists.foo.urls')),

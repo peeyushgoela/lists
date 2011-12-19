@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-
 {% block title %}My amazing lists{% endblock %}
 
+{% block sidebar %}
+ <li><a href="/todo_lists/login">Login</a></li>
+ <li><a href="/todo_lists/signup">Signup</a></li>
+{% endblock %}
+
 {% block content %}
-i am in content {{p}}
+ i am in content {{p}}
 {% endblock %}

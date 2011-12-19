@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}SIGN-UP{% endblock %}
+
+{% block sidebar %}
+ <li><a href="/todo_lists/login">Login</a></li>
+{% endblock %}
+<!--<form action="/polls/{{ poll.id }}/vote/" method="post">
+{% csrf_token %}
+{% for choice in poll.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>-->
+
+{% block content %}
+<form action="/todo_lists/signup_function" method="post"> 
+{% csrf_token %}
+<lablel>username</label><input type="text" name="username"/>
+<lablel>password</label><input type="password" name="password"/>
+<lablel>email</label><input type="text" name="email"/>
+<input type="submit">
+
+</form>
+{% endblock %}
