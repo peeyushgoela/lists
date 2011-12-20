@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block sidebar %}
+ <li><a href="/todo_lists/logout">Logout</a></li>
+ <!--<li><a href="/todo_lists/signup">Signup</a></li>-->
+{% endblock %}
+
+{% block content %}
+<table>
+
+
+{%for list in lists%}
+<tr>
+<td>{{list.user_id_id}}</td><td>{{list.item}}</td><td>{%if list.isComplete%}Complete{%else%}InComplete{%endif%}</td>
+<td><a href="/todo_lists/edit/{{list.id}}">edit</a></td><td><a href="/todo_lists/delete_task/{{list.id}}">delete</a></td><br>
+</tr>
+ {%endfor%}
+</table>
+<a href="/todo_lists/add_task">Add</a>
+
+{% endblock %}

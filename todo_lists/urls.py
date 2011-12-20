@@ -10,7 +10,9 @@ urlpatterns = patterns('',
                        url(r'^signup', 'todo_lists.views.signup'),
                        url(r'^home', 'todo_lists.views.home'),
                        url(r'^logout', 'todo_lists.views.logout'),
-                       
+                       url(r'^edit/(\d+)', 'todo_lists.views.edit'),
+                       url(r'^delete_task/(\d+)', 'todo_lists.views.delete_task'),
+                       url(r'^add_task', 'todo_lists.views.add_task'),
     # Examples:
     # url(r'^$', 'lists.views.home', name='home'),
     # url(r'^lists/', include('lists.foo.urls')),

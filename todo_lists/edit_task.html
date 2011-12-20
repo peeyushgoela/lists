@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-{% block title %}SIGN-UP{% endblock %}
+{% block title %}Edit Task{% endblock %}
 
 {% block sidebar %}
- <li><a href="/todo_lists/login">Login</a></li>
+ <li><a href="/todo_lists/delete_task/{{list_id}}">Delete</a></li>
+ <li><a href="/todo_lists/add_task">Add</a></li>
 {% endblock %}
 
 {% block content %}
