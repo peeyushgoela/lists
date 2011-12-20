@@ -9,10 +9,8 @@ from todo_lists.forms import *
 def index(request):
     if 'id' in request.session:
         return HttpResponseRedirect('/todo_lists/home/')
-##    latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
     p="hi"
     return render_to_response("index.html",{'p':p})
-##render_to_response('polls/index.html', {'latest_poll_list': latest_poll_list})
 
 @csrf_exempt
 def login(request):
@@ -97,9 +95,21 @@ def edit(request,list_id):
     return HttpResponse('SOme Error occurred')
 
 def delete_task(request, list_id):
-    s="deleting "+list_id 
-    return HttpResponse(s)
+    if "id" in request.session:
+        p=List.objects.get(pk=list_id)
+        p.delete()        
+        return HttpResponseRedirect('/todo_lists/home')
+        
+    else:
+        return HttpResponseRedirect('/todo_lists/')
 
+def delete_acc(request):
+    if "id" in request.session:
+        p=User.objects.get(pk=request.session["id"])
+        p.delete()        
+        return HttpResponseRedirect('/todo_lists/logout')
+    else:
+        return HttpResponseRedirect('/todo_lists/')
 
 @csrf_exempt
 def add_task(request):
@@ -116,7 +126,8 @@ def add_task(request):
             return render_to_response("add_task.html",{'form':form})
     else:
         return HttpResponseRedirect('/todo_lists/')
-        
+
+       
 ##Create your views here.
 ##from django.http import HttpResponse
 ##

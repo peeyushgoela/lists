@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from django.views.static import * 
+from django.conf import settings
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -12,7 +13,9 @@ urlpatterns = patterns('',
                        url(r'^logout', 'todo_lists.views.logout'),
                        url(r'^edit/(\d+)', 'todo_lists.views.edit'),
                        url(r'^delete_task/(\d+)', 'todo_lists.views.delete_task'),
+                       url(r'^delete_acc/', 'todo_lists.views.delete_acc'),
                        url(r'^add_task', 'todo_lists.views.add_task'),
+                       url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     # Examples:
     # url(r'^$', 'lists.views.home', name='home'),
     # url(r'^lists/', include('lists.foo.urls')),

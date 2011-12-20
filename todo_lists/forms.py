@@ -1,6 +1,6 @@
 from django import forms
 
-priority_choices=((0, 'high'),(1,'medium'),(2,'low'))
+priority_choices=((0, 'High'),(1,'Medium'),(2,'Low'))
 
 class signup_form(forms.Form):
     username=forms.CharField()

@@ -3,20 +3,35 @@
 
 {% block sidebar %}
  <li><a href="/todo_lists/logout">Logout</a></li>
- <!--<li><a href="/todo_lists/signup">Signup</a></li>-->
+ <li><a href="/todo_lists/add_task">Add Task</a></li>
+ <li><a href="/todo_lists/delete_acc">Delete Account</a></li>
 {% endblock %}
 
 {% block content %}
 <table>
-
+<tr>
+ <td>Priority</td>
+ <td>Task</td>
+ <td>Status</td>
+ <td>Creates On</td>
+ <td>Actions</td>
+</tr>
 
 {%for list in lists%}
+<font color=#000000>
 <tr>
-<td>{{list.user_id_id}}</td><td>{{list.item}}</td><td>{%if list.isComplete%}Complete{%else%}InComplete{%endif%}</td>
-<td><a href="/todo_lists/edit/{{list.id}}">edit</a></td><td><a href="/todo_lists/delete_task/{{list.id}}">delete</a></td><br>
+<td>
+	{%ifequal list.priority 0%}<font size='4' color='RED'>High{%endifequal%}
+	{%ifequal list.priority 1%}<font size='4' color='BLACK'>Medium{%endifequal%}
+	{%ifequal list.priority 2%}<font size='4' color='BLUE'>Low{%endifequal%}
+</td>
+<td>{{list.item}}</td>
+<td>{%if list.isComplete%}<font color='GREEN'>Complete{%else%}<font color='RED'>Pending{%endif%}</font></td>
+<td>{{list.created}}</td>
+<td class='actions'><a href="/todo_lists/edit/{{list.id}}">edit</a>
+<a href="/todo_lists/delete_task/{{list.id}}">delete</a></td>
 </tr>
- {%endfor%}
+</font>
+{%endfor%}
 </table>
-<a href="/todo_lists/add_task">Add</a>
-
 {% endblock %}
