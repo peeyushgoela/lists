@@ -1,0 +1,20 @@
+BEGIN;
+CREATE TABLE "todo_lists_user" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "username" varchar(50) NOT NULL,
+    "password" varchar(50) NOT NULL,
+    "email" varchar(50) NOT NULL,
+    "created" datetime NOT NULL
+)
+;
+CREATE TABLE "todo_lists_list" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "user_id_id" integer NOT NULL REFERENCES "todo_lists_user" ("id"),
+    "item" varchar(150) NOT NULL,
+    "priority" integer NOT NULL,
+    "isComplete" integer NOT NULL,
+    "created" datetime NOT NULL
+)
+;
+CREATE INDEX "todo_lists_list_2ccaea20" ON "todo_lists_list" ("user_id_id");
+COMMIT;
