@@ -27,9 +27,18 @@ def login(request):
                 if p[0].password==cd['password']:
                     request.session["id"]=p[0].id
                     return HttpResponseRedirect('/todo_lists/home/')
-
-            return HttpResponse("Invalid User")
-            
+                else:
+                    error="Username Password do not match.."
+                    form=login_form();
+                    return render_to_response("login.html",{'form':form,'error':error})
+            else:
+                error="No Such Username"
+                form=login_form();
+                return render_to_response("login.html",{'form':form,'error':error})
+        else:
+            error="The details are not valid"
+            form=login_form();
+            return render_to_response("login.html",{'form':form,'error':error})
     else:
         form=login_form();
             
@@ -43,9 +52,14 @@ def signup(request):
         form=signup_form(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
-            p=User(username=cd['username'],password=cd['password'],email=cd['email'])
-            p.save()
-            return HttpResponseRedirect('/todo_lists/')
+            try:
+                temp=User.objects.get(username=cd['username'])
+            except DoesNotExist:
+                p=User(username=cd['username'],password=cd['password'],email=cd['email'])
+                p.save()
+                return HttpResponseRedirect('/todo_lists/')
+            form=signup_form()
+            return render_to_response("signup.html",{'form':form,'error':'Username Already Exists..'})
     else:
         form=signup_form();
             
@@ -81,6 +95,16 @@ def edit(request,list_id):
                 p.priority=cd['priority']
                 p.save()
                 return HttpResponseRedirect('/todo_lists/home')
+            else:
+                error="Invalid Input"
+                p=List.objects.get(pk=list_id)
+                if p.isComplete:
+                    ic=True
+                else:
+                    ic=False
+                form=edittask_form(initial={'item':p.item, 'priority':p.priority, 'is_complete':ic});
+                return render_to_response("edit_task.html",{'form':form,'list_id':list_id,'error':error})
+    
         else:
             p=List.objects.get(pk=list_id)
             if p.isComplete:
@@ -121,6 +145,10 @@ def add_task(request):
                 p=User.objects.get(pk=request.session["id"])
                 p.list_set.create(item=cd['item'],priority=cd['priority'],isComplete=0)
                 return HttpResponseRedirect('/todo_lists/home')
+            else:
+                error="InValid Form"
+                form=addtask_form();
+            return render_to_response("add_task.html",{'form':form,'error':error})
         else:
             form=addtask_form();
             return render_to_response("add_task.html",{'form':form})

@@ -18,6 +18,6 @@ class addtask_form(forms.Form):
 class edittask_form(forms.Form):
     item=forms.CharField()
     priority=forms.ChoiceField(widget=forms.Select, choices=priority_choices)
-    is_complete=forms.BooleanField()
+    is_complete=forms.BooleanField(required=False)
 
     

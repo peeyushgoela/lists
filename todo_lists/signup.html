@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+{%if error%}<div id="errors">{{error}}</div>{%endif%}
+
 <form action="" method="post"> 
 <table>{{form.as_table}}</table>
 
