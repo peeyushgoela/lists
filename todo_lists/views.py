@@ -54,12 +54,15 @@ def signup(request):
             cd=form.cleaned_data
             try:
                 temp=User.objects.get(username=cd['username'])
-            except DoesNotExist:
+            except User.DoesNotExist:
                 p=User(username=cd['username'],password=cd['password'],email=cd['email'])
                 p.save()
                 return HttpResponseRedirect('/todo_lists/')
             form=signup_form()
             return render_to_response("signup.html",{'form':form,'error':'Username Already Exists..'})
+            
+        else:
+            HttpResponse("problem")
     else:
         form=signup_form();
             

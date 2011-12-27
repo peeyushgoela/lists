@@ -102,7 +102,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'lists.urls'
 
-TEMPLATE_DIRS = ("D:/Project work/python/lists/todo_lists/",
+TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), "todo_lists/"),
+    #"D:/Project work/python/lists/todo_lists/",
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
